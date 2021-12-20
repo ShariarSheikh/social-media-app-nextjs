@@ -1,0 +1,56 @@
+/* ./styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-glass-blur {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+}
+
+.bg-gradient {
+  background: rgb(255, 119, 200);
+  background: linear-gradient(
+    90deg,
+    rgb(255, 176, 223) 0%,
+    rgba(160, 230, 252, 0.562) 44%,
+    rgba(255, 106, 114, 0.623) 100%
+  );
+}
+
+.hide_scroll_bar {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.hide_scroll_bar::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+.style_scroll_bar::-webkit-scrollbar {
+  width: 8px; /* Remove scrollbar space */
+  background: rgb(61, 61, 61); /* Optional: just make scrollbar invisible */
+}
+
+.style_scroll_bar::-webkit-scrollbar-thumb {
+  background: #868686;
+}
+
+.bg-glass-blur-chat {
+  background: rgba(255, 255, 255, 0.027);
+  backdrop-filter: blur(150px);
+}
+
+@layer components {
+  /* reaction btn s */
+  .post-reaction-btn {
+    @apply w-[40px] h-[40px] bg-gray-100 dark:bg-transparent rounded-full overflow-hidden flex justify-center items-center hover:rotate-45 duration-200;
+  }
+
+  /* actions btn */
+  .post-action-btn {
+    @apply py-1 px-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl flex justify-center items-center space-x-2 cursor-pointer ml-2;
+  }
+}
