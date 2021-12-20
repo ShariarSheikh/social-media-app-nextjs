@@ -22,7 +22,7 @@ const ProfileAvatar: FC<ProfileAvatarProps> = ({ avatar, link }) => {
         />
       )}
       {!avatar && (
-        <div className="w-full h-full flex justify-center items-center">H</div>
+        <div className="w-full h-full flex justify-center items-center bg-green-500"></div>
       )}
     </div>
   );

@@ -5,10 +5,11 @@ import { ThemeButtons } from "../../utils/ThemeButtons";
 import HeaderIcon from "./components/HeaderIcon";
 import ProfileAvatar from "./components/ProfileAvatar";
 import { BsPerson } from "react-icons/bs";
-
+import { useSelector } from "react-redux";
+import { isLoggedIn } from "../../redux/userLoginSlice/userLoginSlice";
 
 const Index = () => {
-
+  const { user } = useSelector(isLoggedIn);
 
   return (
     <header className="w-full h-14 fixed top-0 border-b-[1px] border-gray-200 dark:border-gray-700 z-40 bg-glass-blur">
@@ -52,7 +53,7 @@ const Index = () => {
 
           <ThemeButtons />
 
-          {false ? (
+          {user?.email ? (
             <>
               <HeaderIcon
                 Icon={
@@ -70,7 +71,7 @@ const Index = () => {
               />
 
               <div className="cursor-pointer">
-                <ProfileAvatar avatar={"/kasdd"} link="/profile" />
+                <ProfileAvatar avatar={user?.profileImg} link="/profile" />
               </div>
             </>
           ) : (

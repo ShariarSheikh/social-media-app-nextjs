@@ -1,13 +1,12 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Header from "../../components/Header/Index";
-import { useSession } from "next-auth/react";
 import SearchByName from "../../Layouts/articles_layouts/SearchByName/SearchByName";
 import SearchByTag from "../../Layouts/articles_layouts/SearchByTag/SearchByTag";
 import PostListCart from "../../utils/PostListCart/PostListCart";
 
 const Articles: NextPage = () => {
-  const { data: session } = useSession();
+
 
   return (
     <div className="w-full bg-[#ffffff] dark:bg-[#121212]">

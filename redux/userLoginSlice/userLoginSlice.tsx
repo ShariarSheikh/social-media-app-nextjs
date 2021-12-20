@@ -7,6 +7,9 @@ import axios from "axios";
 
 const cookies = new Cookies();
 
+const data =
+  typeof window !== "undefined" && cookies.get("u") ? cookies.get("u") : {};
+
 export const singUpUser = createAsyncThunk(
   "user/singUpUser",
   async (user: SignUpRequestData, { rejectWithValue }) => {
@@ -58,11 +61,20 @@ export const userLoginSlice = createSlice({
   initialState: {
     status: null,
     error: null,
+    user: data,
   },
 
   reducers: {
+    addUser: (state, action) => {
+      state.user = action.payload;
+
+      cookies.set(process.env.NEXT_PUBLIC_USER as string, state.user, {
+        path: "/",
+      });
+    },
     logOut: () => {
-      cookies.remove("uTn");
+      cookies.remove(process.env.NEXT_PUBLIC_TOKEN_NAME as string);
+      cookies.remove(process.env.NEXT_PUBLIC_USER as string);
       router.reload();
     },
   },
@@ -99,7 +111,7 @@ export const userLoginSlice = createSlice({
   },
 });
 
-export const { logOut } = userLoginSlice.actions;
+export const { addUser, logOut } = userLoginSlice.actions;
 
 export const isLoggedIn = (state: RootState) => state.isLoggedIn;
 

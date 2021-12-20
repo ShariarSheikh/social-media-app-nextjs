@@ -89,7 +89,7 @@ export default Login;
 const LoginButton = () => {
   return (
     <button
-      className="w-full mt-5 h-10 rounded-sm cursor-pointer
+      className="w-full mt-2 h-10 rounded-sm cursor-pointer
        bg-blue-600 text-white font-medium active:scale-95 duration-200"
       type="submit"
     >
@@ -101,7 +101,7 @@ const LoginButton = () => {
 const LoadingButton = () => {
   return (
     <button
-      className="w-full mt-5 h-10 rounded-sm cursor-wait
+      className="w-full mt-2 h-10 rounded-sm cursor-wait
         bg-blue-600 text-white font-medium active:scale-95 duration-200"
     >
       Loading...

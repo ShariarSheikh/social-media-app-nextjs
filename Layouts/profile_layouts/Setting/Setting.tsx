@@ -1,12 +1,9 @@
 import React, { FC } from "react";
 import Link from "next/link";
 import router from "next/router";
-import { signOut } from "next-auth/react";
 
 const Setting: FC = () => {
   function logOutUser() {
-    signOut();
-    router.replace("/join");
   }
   return (
     <div className="w-full bg-white dark:bg-[#161718] mt-28 px-4 lg:-px-0">
