@@ -43,7 +43,7 @@ const SignUp: FC<{ setIsLogin: (isLogin: string) => void }> = ({
             Name
           </label>
           <input
-            className="outline-none bg-blue-50 py-2 pl-2 text-gray-700 mt-2"
+            className="outline-none dark:bg-[#2d3240] bg-gray-100 py-2 pl-2 text-gray-700 dark:text-gray-300 mt-2"
             type="name"
             placeholder="Enter your name"
             value={name}
@@ -56,7 +56,7 @@ const SignUp: FC<{ setIsLogin: (isLogin: string) => void }> = ({
             Email
           </label>
           <input
-            className="outline-none bg-blue-50 py-2 pl-2 text-gray-700 mt-2"
+            className="outline-none dark:bg-[#2d3240] bg-gray-100 py-2 pl-2 text-gray-700 dark:text-gray-300 mt-2"
             type="email"
             placeholder="Enter your email address"
             value={email}
@@ -72,7 +72,7 @@ const SignUp: FC<{ setIsLogin: (isLogin: string) => void }> = ({
             Password
           </label>
           <input
-            className="outline-none bg-blue-50 py-2 pl-2 text-gray-700 mt-2"
+            className="outline-none dark:bg-[#2d3240] bg-gray-100 py-2 pl-2 text-gray-700 dark:text-gray-300 mt-2"
             type="password"
             placeholder="Enter your password"
             value={password}

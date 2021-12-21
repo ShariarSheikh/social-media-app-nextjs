@@ -13,15 +13,26 @@ import { addUser, isLoggedIn } from "../redux/userLoginSlice/userLoginSlice";
 
 const cookies = new Cookies();
 
-const Home: NextPage = ({ data }) => {
+interface Data {
+  isLoggedInUser: boolean;
+  isToken: boolean;
+  data: {
+    _id: string;
+    name: string;
+    email: string;
+    profileImg: string;
+    created: string;
+  };
+}
+
+const Home: NextPage<{ data: Data }> = ({ data }) => {
   const { user } = useSelector(isLoggedIn);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!data.isLoggedInUser && data.isToken) {
       cookies.remove(process.env.NEXT_PUBLIC_TOKEN_NAME as string);
-      cookies.remove(process.env.NEXT_PUBLIC_PROFILE_IMG_NAME as string);
-      cookies.remove(process.env.NEXT_PUBLIC_USER_NAME as string);
+      cookies.remove(process.env.NEXT_PUBLIC_USER as string);
     }
     if (data.data && data.isLoggedInUser && data.isToken) {
       dispatch(addUser(data.data));

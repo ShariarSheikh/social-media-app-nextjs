@@ -55,6 +55,42 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+/*
+.
+.
+.
+.
+.
+.
+*/
+export const deleteAccount = createAsyncThunk(
+  "user/deleteAccount",
+  async (id: string, { rejectWithValue }) => {
+    const token = cookies.get(process.env.NEXT_PUBLIC_TOKEN_NAME as string);
+
+    try {
+      const isDeleted = await axios.delete(
+        `http://localhost:8000/auth/deleteAccount?id=${id}`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (isDeleted?.data?.success) {
+        cookies.remove(process.env.NEXT_PUBLIC_TOKEN_NAME as string);
+        cookies.remove(process.env.NEXT_PUBLIC_USER as string);
+        alert("Your Account Has Been Deleted");
+        router.reload();
+      }
+
+      return;
+    } catch (e: any) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
 
 export const userLoginSlice = createSlice({
   name: "join user",
@@ -97,11 +133,24 @@ export const userLoginSlice = createSlice({
     [loginUser.pending.type]: (state: State) => {
       state.status = "pending";
     },
-    //
     [loginUser.fulfilled.type]: (state: State) => {
       state.status = "success";
     },
     [loginUser.rejected.type]: (
+      state: State,
+      action: PayloadAction<string>
+    ) => {
+      state.status = "rejected";
+      state.error = action.payload;
+    },
+    //
+    [deleteAccount.pending.type]: (state: State) => {
+      state.status = "pending";
+    },
+    [deleteAccount.fulfilled.type]: (state: State) => {
+      state.status = "success";
+    },
+    [deleteAccount.rejected.type]: (
       state: State,
       action: PayloadAction<string>
     ) => {

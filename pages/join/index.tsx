@@ -3,7 +3,6 @@ import type { NextPage } from "next";
 import Protected from "../../HOC/Protected";
 import Header from "../../components/Header/Index";
 import Form from "./components/Form";
-import { GetServerSideProps } from "next";
 
 
 const Index: NextPage = () => {
@@ -23,17 +22,6 @@ const Index: NextPage = () => {
     </div>
   );
 };
-
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const providers = await getProviders();
-//   console.log(providers);
-  
-//   return {
-//     props: {
-//       providers,
-//     },
-//   };
-// };
 
 Index.displayName = "Index";
 export default Protected(Index);

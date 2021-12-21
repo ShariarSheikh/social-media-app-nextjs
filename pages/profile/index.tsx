@@ -1,74 +1,69 @@
-// import { doc, getDoc } from "@firebase/firestore";
-import {
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-  NextPage,
-} from "next";
+import Cookies from "universal-cookie";
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import ProtectedHome from "../../HOC/ProtectedHome";
-// import { db } from "../../firebase";
-import Header from "../../Layouts/profile_layouts/Header/Header";
-import Setting from "../../Layouts/profile_layouts/Setting/Setting";
+import axios from "axios";
+import HeroSection from "./components/HeroSection";
+import Header from "../../components/Header/Index";
 
-const Profile: NextPage = () => {
-  const [user, setUser] = useState({});
+interface Data {
+  data: {
+    _id: string;
+    name: string;
+    email: string;
+    profileImg: string;
+    created: string;
+  };
+}
 
-  // useEffect(() => {
-  //   const convertUser = JSON.parse(data);
-
-  //   convertUser && setUser(convertUser);
-  // }, [data]);
-
+const Profile: NextPage<{ data: Data }> = ({ data }) => {
   return (
     <div>
       <Head>
-        <title>Profile - </title>
+        <title>{data.data.name}</title>
         <meta name="description" content="chat application" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Header />
 
       <main className="w-full">
         <div className="max-w-[1366px] min-h-screen m-auto">
-          <Header />
-          <Setting />
+          {data?.data && <HeroSection data={data?.data} />}
         </div>
       </main>
     </div>
   );
 };
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const { u } = context.query;
-//   const uid: string = u;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { req } = context;
+  const tokenName = process.env.NEXT_PUBLIC_TOKEN_NAME as string;
+  const cookies = new Cookies(req.headers.cookie);
+  const token = cookies.get(tokenName);
 
-//   if (!uid) {
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: false,
-//       },
-//     };
-//   }
+  try {
+    const fetchUser = await axios.get("http://localhost:8000/auth/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const { user } = await fetchUser?.data?.data;
 
-//   const docRef = doc(db, "users", uid);
-//   const docSnap = await getDoc(docRef);
+    return {
+      props: {
+        data: {
+          isLoggedInUser: true,
+          isToken: true,
+          data: user,
+        },
+      },
+    };
+  } catch (error) {}
 
-//   const userData = docSnap.data();
-
-//   const data = JSON.stringify(userData);
-
-//   if (!data) {
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: false,
-//       },
-//     };
-//   }
-
-//   return {
-//     props: { data }, // will be passed to the page component as props
-//   };
-// };
-export default ProtectedHome(Profile);
+  return {
+    redirect: {
+      permanent: true,
+      destination: "/join",
+    },
+  };
+};
+export default Profile;
