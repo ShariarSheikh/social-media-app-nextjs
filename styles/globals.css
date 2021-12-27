@@ -46,11 +46,16 @@
 @layer components {
   /* reaction btn s */
   .post-reaction-btn {
-    @apply w-[40px] h-[40px] bg-gray-100 dark:bg-transparent rounded-full overflow-hidden flex justify-center items-center hover:rotate-45 duration-200;
+    @apply w-[40px] h-[40px] cursor-pointer bg-gray-100 dark:bg-transparent active:scale-95 duration-150 rounded-full overflow-hidden flex justify-center items-center hover:rotate-45;
   }
 
   /* actions btn */
   .post-action-btn {
-    @apply py-1 px-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl flex justify-center items-center space-x-2 cursor-pointer ml-2;
+    @apply py-1 md:px-2 sm:text-base text-sm hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl flex justify-center items-center space-x-2 cursor-pointer ml-2;
   }
+}
+
+.hide_scroll_bar::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
 }

@@ -3,9 +3,10 @@ module.exports = {
   reactStrictMode: true,
   images: {
     domains: [
-      "lh3.googleusercontent.com",
       "images.unsplash.com",
-      "cdn.fakercloud.com",
+      "i.ibb.co",
+      "localhost",
+      "safe-tundra-29665.herokuapp.com",
     ],
   },
 };

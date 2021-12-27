@@ -1,10 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
-
 const tagData =
   typeof window !== "undefined" && localStorage.getItem("uTags")
-    ? JSON.parse(localStorage.getItem("uTags"))
+    ? JSON.parse(localStorage.getItem("uTags") || "")
     : [];
 
 export const addTagsSlice = createSlice({

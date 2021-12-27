@@ -4,25 +4,39 @@ import Cookies from "universal-cookie";
 import { RootState } from "../store";
 import { LogInRequestData, SignUpRequestData, State } from "./interface";
 import axios from "axios";
-
+import { storeUserCookies } from "../../utils/storeUserCookies";
 const cookies = new Cookies();
+const key = process.env.NEXT_PUBLIC_API_KEY as string;
+const myToken = cookies.get(process.env.NEXT_PUBLIC_TOKEN_NAME as string);
 
 const data =
-  typeof window !== "undefined" && cookies.get("u") ? cookies.get("u") : {};
+  typeof window !== "undefined" &&
+  cookies.get(process.env.NEXT_PUBLIC_USER as string)
+    ? cookies.get(process.env.NEXT_PUBLIC_USER as string)
+    : {};
 
 export const singUpUser = createAsyncThunk(
   "user/singUpUser",
   async (user: SignUpRequestData, { rejectWithValue }) => {
     try {
       const newUser = await axios.post(
-        "http://localhost:8000/auth/register",
-        user
+        process.env.NEXT_PUBLIC_REGISTER_URL as string,
+        user,
+        { headers: { API_KEY: key } }
       );
 
-      const { token } = newUser?.data?.data;
-      cookies.set("uTn", token, { path: "/" });
-      router.replace("/");
+      const { token, name, email, profileImg, profileId, imgFileName } =
+        newUser?.data?.data;
 
+      const uProfile = {
+        name,
+        email,
+        profileImg,
+        profileId,
+        imgFileName,
+      };
+
+      storeUserCookies(token, uProfile);
       return;
     } catch (e: any) {
       return rejectWithValue(e.message);
@@ -42,13 +56,22 @@ export const loginUser = createAsyncThunk(
   async (user: LogInRequestData, { rejectWithValue }) => {
     try {
       const newUser = await axios.post(
-        "http://localhost:8000/auth/login",
-        user
+        process.env.NEXT_PUBLIC_LOGIN_URL as string,
+        user,
+        { headers: { API_KEY: key } }
       );
 
-      const { token } = newUser?.data?.data;
-      cookies.set("uTn", token, { path: "/" });
-      router.replace("/");
+      const { token, name, email, profileImg, profileId, imgFileName } =
+        newUser?.data?.data;
+
+      const uProfile = {
+        name,
+        email,
+        profileImg,
+        profileId,
+        imgFileName,
+      };
+      storeUserCookies(token, uProfile);
       return;
     } catch (e: any) {
       return rejectWithValue(e.message);
@@ -70,10 +93,11 @@ export const deleteAccount = createAsyncThunk(
 
     try {
       const isDeleted = await axios.delete(
-        `http://localhost:8000/auth/deleteAccount?id=${id}`,
+        `${process.env.NEXT_PUBLIC_DELETE_ACCOUNT_URL}?id=${id}`,
         {
           headers: {
             Authorization: "Bearer " + token,
+            API_KEY: key,
           },
         }
       );
@@ -92,22 +116,51 @@ export const deleteAccount = createAsyncThunk(
   }
 );
 
+// img profile img
+export const profileImgUpdate = createAsyncThunk(
+  "user/profileImgUpdate",
+  async (data: any, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(
+        process.env.NEXT_PUBLIC_VERCEL_UR_PROFILE_IMG as string,
+        data,
+        {
+          headers: {
+            Authorization: "Bearer " + myToken,
+            API_KEY: key,
+          },
+        }
+      );
+      const { token, name, email, profileImg, profileId, imgFileName } =
+        response?.data?.data;
+
+      const uProfile = {
+        name,
+        email,
+        profileImg,
+        profileId,
+        imgFileName,
+      };
+      storeUserCookies(token, uProfile);
+
+      return;
+    } catch (error: any) {
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
 export const userLoginSlice = createSlice({
   name: "join user",
   initialState: {
     status: null,
     error: null,
     user: data,
+    imgStatus: "",
+    imgError: "",
   },
 
   reducers: {
-    addUser: (state, action) => {
-      state.user = action.payload;
-
-      cookies.set(process.env.NEXT_PUBLIC_USER as string, state.user, {
-        path: "/",
-      });
-    },
     logOut: () => {
       cookies.remove(process.env.NEXT_PUBLIC_TOKEN_NAME as string);
       cookies.remove(process.env.NEXT_PUBLIC_USER as string);
@@ -157,10 +210,22 @@ export const userLoginSlice = createSlice({
       state.status = "rejected";
       state.error = action.payload;
     },
+    //
+    //upload profile image
+    [profileImgUpdate.pending.type]: (state, action) => {
+      state.imgStatus = "pending";
+    },
+    [profileImgUpdate.fulfilled.type]: (state, action) => {
+      state.imgStatus = "success";
+    },
+    [profileImgUpdate.rejected.type]: (state, action) => {
+      state.imgStatus = "rejected";
+      state.imgError = action.payload;
+    },
   },
 });
 
-export const { addUser, logOut } = userLoginSlice.actions;
+export const { logOut } = userLoginSlice.actions;
 
 export const isLoggedIn = (state: RootState) => state.isLoggedIn;
 

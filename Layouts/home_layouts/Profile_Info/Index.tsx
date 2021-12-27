@@ -1,5 +1,4 @@
 import Image from "next/image";
-import router from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import {
   isLoggedIn,
@@ -17,7 +16,7 @@ const Index = () => {
 
   return (
     <div className="w-full border dark:border-[#302e2e] p-2 mt-5">
-      <div className="w-full flex justify-center items-center h-10">
+      <div className="w-[40px] m-auto h-[40px] rounded-full overflow-hidden flex justify-center items-center">
         {user.profileImg && (
           <Image
             src={user.profileImg}
@@ -25,10 +24,11 @@ const Index = () => {
             width={40}
             height={40}
             className="rounded-full overflow-hidden"
+            objectFit="cover"
           />
         )}
         {!user.profileImg && user && (
-          <div className="w-[40px] h-[40px] rounded-full overflow-hidden bg-green-500 flex justify-center items-center"></div>
+          <div className="w-full h-full bg-green-500 flex justify-center items-center"></div>
         )}
       </div>
       {user && (

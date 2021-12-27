@@ -13,6 +13,14 @@ interface PostProps {
   textHeader?: string;
   textParagraph?: string;
   postType: string;
+  comments: number;
+  reactions: {
+    love: number;
+    angry: number;
+    bad: number;
+    fire: number;
+  };
+  created: string;
 }
 
 const PostCard: FC<PostProps> = ({
@@ -24,7 +32,12 @@ const PostCard: FC<PostProps> = ({
   textHeader,
   textParagraph,
   postType,
+  comments,
+  reactions,
+  created,
 }) => {
+  const link = `/posts/${postLink}`;
+
   return (
     <div className="w-full  pb-3 border border-gray-100 dark:border-[#242424] px-3 rounded-md mb-8">
       {/* header */}
@@ -33,15 +46,22 @@ const PostCard: FC<PostProps> = ({
         name={name}
         posterLink={posterLink}
         postType={postType}
+        created={created}
       />
       <PostText
         textHeader={textHeader}
         textParagraph={textParagraph}
-        postLink={postLink}
+        postLink={link}
       />
-      {thumbnail && <PostThumbnail thumbnail={thumbnail} />}
+      {thumbnail && <PostThumbnail thumbnail={thumbnail} link={link} />}
 
-      <PostActions postType={postType} />
+      <PostActions
+        postLink={link}
+        postId={postLink}
+        postType={postType}
+        comments={comments}
+        reaction={reactions}
+      />
     </div>
   );
 };

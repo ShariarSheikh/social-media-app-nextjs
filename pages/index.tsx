@@ -1,43 +1,16 @@
-import type { GetServerSideProps, NextPage } from "next";
-import Cookies from "universal-cookie";
+import type { NextPage } from "next";
 import Head from "next/head";
-import Header from "../components/Header/Index";
 import FeedContainer from "../Layouts/home_layouts/FeedContainer/Index";
 import AddTagComponent from "../Layouts/home_layouts/AddTagComponent/AddTagComponent";
 import ProfileInfo from "../Layouts/home_layouts/Profile_Info/Index";
 import AllTags from "../Layouts/home_layouts/AllTags/AllTags";
-import axios from "axios";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addUser, isLoggedIn } from "../redux/userLoginSlice/userLoginSlice";
+import { useSelector } from "react-redux";
+import { isLoggedIn } from "../redux/userLoginSlice/userLoginSlice";
+import SelectedTags from "../Layouts/home_layouts/AddTagComponent/SelectedTags";
 
-const cookies = new Cookies();
 
-interface Data {
-  isLoggedInUser: boolean;
-  isToken: boolean;
-  data: {
-    _id: string;
-    name: string;
-    email: string;
-    profileImg: string;
-    created: string;
-  };
-}
-
-const Home: NextPage<{ data: Data }> = ({ data }) => {
+const Home: NextPage = () => {
   const { user } = useSelector(isLoggedIn);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!data.isLoggedInUser && data.isToken) {
-      cookies.remove(process.env.NEXT_PUBLIC_TOKEN_NAME as string);
-      cookies.remove(process.env.NEXT_PUBLIC_USER as string);
-    }
-    if (data.data && data.isLoggedInUser && data.isToken) {
-      dispatch(addUser(data.data));
-    }
-  }, [data, dispatch]);
 
   return (
     <div className="w-full bg-[#ffffff] dark:bg-[#121212]">
@@ -46,63 +19,31 @@ const Home: NextPage<{ data: Data }> = ({ data }) => {
         <meta name="description" content="chat application" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
 
       <main className="w-full min-h-screen mt-16 relative">
         <AllTags />
-        <section className="w-full max-w-[1366px] flex flex-row min-h-screen relative m-auto overflow-hidden">
-          <div className="min-w-[300px] w-full max-w-[300px] relative">
+        <SelectedTags />
+        <section className="w-full px-3 2xl:px-0 max-w-[1366px] flex flex-row min-h-screen relative m-auto overflow-hidden">
+          <div className="hidden xl:block min-w-[300px] w-full max-w-[300px] relative">
             <AddTagComponent />
           </div>
-          <div className="w-full flex-grow max-w-[700px] px-7">
+          <div className="w-full flex-grow max-w-[700px] sm:px-7">
             <FeedContainer />
           </div>
-          {user?.name && (
-            <div className="min-w-[300px] w-full max-w-[300px] relative">
-              <ProfileInfo />
+
+          <div className="md:min-w-[200px] lg:min-w-[300px] max-w-[300px]">
+            <div className="min-w-[200px] hidden md:block w-full max-w-[300px] relative">
+              {user?.name && <ProfileInfo />}
             </div>
-          )}
+            <div className="hidden md:block xl:hidden lg:min-w-[300px] min-w-[200px] w-full lg:max-w-[300px] max-w-[220px] relative">
+              <AddTagComponent />
+            </div>
+          </div>
         </section>
         {/* // )} */}
       </main>
     </div>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { req } = context;
-  const tokenName = process.env.NEXT_PUBLIC_TOKEN_NAME as string;
-  const cookies = new Cookies(req.headers.cookie);
-  const token = cookies.get(tokenName);
-
-  try {
-    const fetchUser = await axios.get("http://localhost:8000/auth/profile", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const { user } = await fetchUser?.data?.data;
-
-    return {
-      props: {
-        data: {
-          isLoggedInUser: true,
-          isToken: true,
-          data: user,
-        },
-      },
-    };
-  } catch (error) {}
-
-  return {
-    props: {
-      data: {
-        isLoggedInUser: false,
-        isToken: token ? true : false,
-        data: false,
-      },
-    },
-  };
 };
 
 export default Home;

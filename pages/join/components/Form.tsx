@@ -1,12 +1,9 @@
 import { FC, useState } from "react";
-import { FcGoogle } from "react-icons/fc";
-import { useDispatch } from "react-redux";
 import Login from "./Login";
 import SignUp from "./SignUp";
 
 const Form: FC = () => {
   const [isLogin, setIsLogin] = useState<string>("login");
-  const dispatch = useDispatch();
 
   return (
     <div className="max-w-3xl w-full flex flex-col justify-center items-center h-auto m-auto">

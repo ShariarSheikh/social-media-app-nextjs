@@ -10,7 +10,7 @@ const ArticleTags = [
     id: 1,
     bg: "bg-[#F0DB4F]",
     color: "text-black",
-    tag: "javaScript",
+    tag: "JavaScript",
   },
   {
     id: 2,
@@ -99,12 +99,7 @@ const AllTags = () => {
 
   const dispatch = useDispatch();
 
-  const selectTagHandler = (
-    id: number,
-    tag: string,
-    bg: string,
-    color: string
-  ) => {
+  const selectTagHandler = ({ id, tag, bg, color }: Tags) => {
     const newTag: Tags = {
       id,
       tag,
@@ -119,15 +114,18 @@ const AllTags = () => {
       dispatch(addTags([newTag, ...tags]));
     }
   };
-  return (
-    <div className="max-w-[1366px] w-full m-auto overflow-hidden">
-      <div className="w-full flex justify-start items-center py-2 space-x-2">
+
+ return (
+    <div className="max-w-[1366px] hide_scroll_bar w-full m-auto overflow-x-scroll relative">
+      <div
+        className="w-full flex justify-start items-center py-2 space-x-2"
+      >
         {ArticleTags?.slice(0, moreTag ? 13 : 12).map(
           ({ id, tag, bg, color }) => (
             <button
               key={id}
-              onClick={() => selectTagHandler(id, tag, bg, color)}
-              className={`py-1 px-2 ${bg} ${color} rounded-3xl mb-2 active:scale-105 duration-150`}
+              onClick={() => selectTagHandler({ id, tag, bg, color })}
+              className={`py-1 min-w-[80px] md:min-w-[90px] md:w-[90px] text-sm md:text-base w-[80px] ${bg} ${color} rounded-3xl mb-2 active:scale-105 duration-150`}
             >
               {tag}
             </button>

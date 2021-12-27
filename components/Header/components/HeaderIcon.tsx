@@ -1,4 +1,6 @@
 import router from "next/router";
+import { useDispatch } from "react-redux";
+import { openCreatePost } from "../../../redux/post/createPostSlice/createPostSlice";
 
 const HeaderIcon = ({
   Icon,
@@ -11,8 +13,13 @@ const HeaderIcon = ({
   badge?: number | undefined;
   isDispatch?: string;
 }) => {
+  const dispatch = useDispatch();
+
   const iconHandler = () => {
-    router.push(link);
+    link && router.push(link);
+    if (isDispatch === "createPost") {
+      dispatch(openCreatePost());
+    }
   };
 
   return (

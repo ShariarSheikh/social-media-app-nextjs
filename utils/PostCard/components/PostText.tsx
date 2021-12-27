@@ -14,7 +14,7 @@ const PostText: FC<PostTextProps> = ({
 }) => {
   return (
     <div className="w-full py-4 dark:text-gray-400 text-gray-800">
-      <h1 className="font-bold text-3xl">
+      <h1 className="font-bold md:text-3xl text-xl">
         <Link href={postLink} passHref>
           <a>{textHeader}</a>
         </Link>

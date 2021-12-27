@@ -6,10 +6,13 @@ import { store } from "../redux/store";
 
 import { ThemeProvider } from "next-themes";
 
+import Header from "../components/Header/Index";
+
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <Provider store={store}>
       <ThemeProvider attribute="class">
+        <Header />
         <Component {...pageProps} />
       </ThemeProvider>
     </Provider>
