@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import router from "next/router";
 import Cookies from "universal-cookie";
 import { RootState } from "../store";
 import { LogInRequestData, SignUpRequestData, State } from "./interface";
 import axios from "axios";
 import { storeUserCookies } from "../../utils/storeUserCookies";
+import removeUser from "../../utils/removeUser";
 const cookies = new Cookies();
 const key = process.env.NEXT_PUBLIC_API_KEY as string;
 const myToken = cookies.get(process.env.NEXT_PUBLIC_TOKEN_NAME as string);
@@ -103,14 +103,13 @@ export const deleteAccount = createAsyncThunk(
       );
 
       if (isDeleted?.data?.success) {
-        cookies.remove(process.env.NEXT_PUBLIC_TOKEN_NAME as string);
-        cookies.remove(process.env.NEXT_PUBLIC_USER as string);
         alert("Your Account Has Been Deleted");
-        router.reload();
+        removeUser();
       }
 
       return;
     } catch (e: any) {
+      removeUser();
       return rejectWithValue(e.message);
     }
   }
@@ -162,9 +161,7 @@ export const userLoginSlice = createSlice({
 
   reducers: {
     logOut: () => {
-      cookies.remove(process.env.NEXT_PUBLIC_TOKEN_NAME as string);
-      cookies.remove(process.env.NEXT_PUBLIC_USER as string);
-      router.reload();
+      removeUser();
     },
   },
   extraReducers: {
