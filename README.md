@@ -1,34 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+ <p align="center">
+<img src="https://i.ibb.co/hZc5Yf8/mobiler1.png" width="100%">
+</p>
 
-## Getting Started
+# A social media website [Live Site](https://social-media-app-nextjs.vercel.app/)
 
-First, run the development server:
+### Description
+
+A Full-Stack MERN website build with NextJs (React Js Framework).In this website you can create your account and upload article or post and a user also have profile page which is server side rendering.A user can create,update,delete there post and update profile Image.And you can find dark mode and light mode in this website.
+
+#### What technologies and package did I use on this website(front-end)? Back-End [code](https://github.com/ShariarSheikh/social-media-server)
+
+`React Js` `Next js` `Typescript` `Redux` `React-Redux` `Axios` `Tailwind css` `Universal-cookie` `reduxjs/toolkit` `React-Icons`
+
+## Installing
+
+Clone this repository. If you don't know how to clone the git repository then check this [article](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+
+Install the npm dependencies:
+
+```bash
+npm install
+```
+
+##### Create your .env and you need to setup these variable
+
+```bash
+NEXT_PUBLIC_TOKEN_NAME = 
+NEXT_PUBLIC_USER = 
+NEXT_PUBLIC_API_KEY = 
+
+...............................................................URLS >>>
+___________________________ AUTH
+NEXT_PUBLIC_LOGIN_URL = 
+NEXT_PUBLIC_REGISTER_URL = 
+NEXT_PUBLIC_PROFILE_URL = 
+NEXT_PUBLIC_DELETE_ACCOUNT_URL = 
+NEXT_PUBLIC_GET_ALL_USERS_URL = 
+NEXT_PUBLIC_VERCEL_UR_PROFILE_IMG = 
+______________________________________________ API
+NEXT_PUBLIC_GET_ALL_POSTS_URL = 
+NEXT_PUBLIC_GET_MY_POSTS_URL = 
+NEXT_PUBLIC_GET_SINGLE_POSTS_URL = 
+NEXT_PUBLIC_CREATE_POSTS_URL = 
+NEXT_PUBLIC_DELETE_POSTS_URL = 
+NEXT_PUBLIC_UPDATE_POSTS_URL = 
+```
+
+## Running the applications locally
 
 ```bash
 npm run dev
-# or
-yarn dev
+or
+npm run start
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
