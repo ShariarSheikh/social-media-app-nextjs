@@ -1,5 +1,6 @@
  <p align="center">
-<img src="https://i.ibb.co/hZc5Yf8/mobiler1.png" width="100%">
+<img src="https://i.ibb.co/rmTbNvz/sm1.png" width="100%">
+<img src="https://i.ibb.co/0ysx45G/sm2.png" width="100%">
 </p>
 
 # A social media website [Live Site](https://social-media-app-nextjs.vercel.app/)
@@ -25,25 +26,25 @@ npm install
 ##### Create your .env and you need to setup these variable
 
 ```bash
-NEXT_PUBLIC_TOKEN_NAME = 
-NEXT_PUBLIC_USER = 
-NEXT_PUBLIC_API_KEY = 
+NEXT_PUBLIC_TOKEN_NAME =
+NEXT_PUBLIC_USER =
+NEXT_PUBLIC_API_KEY =
 
 ...............................................................URLS >>>
 ___________________________ AUTH
-NEXT_PUBLIC_LOGIN_URL = 
-NEXT_PUBLIC_REGISTER_URL = 
-NEXT_PUBLIC_PROFILE_URL = 
-NEXT_PUBLIC_DELETE_ACCOUNT_URL = 
-NEXT_PUBLIC_GET_ALL_USERS_URL = 
-NEXT_PUBLIC_VERCEL_UR_PROFILE_IMG = 
+NEXT_PUBLIC_LOGIN_URL =
+NEXT_PUBLIC_REGISTER_URL =
+NEXT_PUBLIC_PROFILE_URL =
+NEXT_PUBLIC_DELETE_ACCOUNT_URL =
+NEXT_PUBLIC_GET_ALL_USERS_URL =
+NEXT_PUBLIC_VERCEL_UR_PROFILE_IMG =
 ______________________________________________ API
-NEXT_PUBLIC_GET_ALL_POSTS_URL = 
-NEXT_PUBLIC_GET_MY_POSTS_URL = 
-NEXT_PUBLIC_GET_SINGLE_POSTS_URL = 
-NEXT_PUBLIC_CREATE_POSTS_URL = 
-NEXT_PUBLIC_DELETE_POSTS_URL = 
-NEXT_PUBLIC_UPDATE_POSTS_URL = 
+NEXT_PUBLIC_GET_ALL_POSTS_URL =
+NEXT_PUBLIC_GET_MY_POSTS_URL =
+NEXT_PUBLIC_GET_SINGLE_POSTS_URL =
+NEXT_PUBLIC_CREATE_POSTS_URL =
+NEXT_PUBLIC_DELETE_POSTS_URL =
+NEXT_PUBLIC_UPDATE_POSTS_URL =
 ```
 
 ## Running the applications locally
