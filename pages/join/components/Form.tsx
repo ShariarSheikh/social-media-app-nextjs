@@ -11,7 +11,7 @@ const Form: FC = () => {
         <p className=" uppercase text-4xl font-bold mt-5">
           Dev <span className="text-blue-500">People</span>
         </p>
-        <p className="mt-7 font-semibold dark:text-gray-400">
+        <p className="mt-7 font-semibold dark:text-gray-400 px-3">
           This Application is for only {"developers'"} purposes, not for real
           users for right now, but if you want you can log in or register your
           account. Your login and register information only stayed for 30 days.

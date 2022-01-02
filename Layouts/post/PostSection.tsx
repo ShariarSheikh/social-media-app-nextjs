@@ -41,7 +41,7 @@ const PostSection: FC<PostSection> = ({
         created={created}
       />
       <div className="w-full mt-9">
-        <h1 className="text-4xl font-bold uppercase text-gray-700 dark:text-gray-300 pb-8">
+        <h1 className="text-xl md:text-4xl font-bold uppercase text-gray-700 dark:text-gray-300 pb-8">
           {postHeader}
         </h1>
         {postThumbnail && (
@@ -91,7 +91,7 @@ const PosterProfile: FC<{
   const year = data.getFullYear();
 
   return (
-    <div className="w-full flex items-center justify-between h-20 relative border-b dark:border-gray-600">
+    <div className="w-full flex flex-col md:flex-row pb-1 items-center justify-between min-h-20 relative border-b dark:border-gray-600">
       <div className="w-full flex items-center justify-start h-full">
         <div
           className="w-[40px] h-[40px] relative flex justify-center items-center cursor-pointer"
@@ -107,8 +107,7 @@ const PosterProfile: FC<{
             />
           )}
           {!posterProfileImg && (
-            <div className="w-[40px] h-[40px] rounded-full overflow-hidden bg-gray-200 dark:bg-gray-800 flex justify-center items-center">
-            </div>
+            <div className="w-[40px] h-[40px] rounded-full overflow-hidden bg-gray-200 dark:bg-gray-800 flex justify-center items-center"></div>
           )}
         </div>
 
@@ -129,9 +128,9 @@ const PosterProfile: FC<{
           </div>
         </div>
       </div>
-      <div className="w-full flex flex-grow mt-7 pr-5">
-        <div className="flex items-center space-x-3 text-gray-600 dark:text-gray-300">
-          <p>Posted: {day + " " + month + " " + year} </p>
+      <div className="w-full flex flex-grow mt-7 pr-5 text-sm">
+        <div className="flex items-center space-x-3 text-gray-600 dark:text-gray-400">
+          <p>Posted: {day + " /" + month + "/ " + year} </p>
           <p>
             Reactions:{" "}
             <strong>
