@@ -22,7 +22,7 @@ const Index: FC = () => {
   };
 
   return (
-    <div className="w-full border dark:border-[#302e2e] mt-5 p-2">
+    <div className="w-full bg-white dark:bg-transparent border dark:border-[#302e2e] mt-5 p-2">
       <p className="text-base text-gray-600 dark:text-gray-500 font-medium">
         To better find Result select tags for only these tags related articles
         show to you

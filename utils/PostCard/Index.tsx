@@ -39,7 +39,7 @@ const PostCard: FC<PostProps> = ({
   const link = `/posts/${postLink}`;
 
   return (
-    <div className="w-full min-h-[250px] pb-3 border border-gray-100 dark:border-[#242424] px-3 rounded-md mb-8">
+    <div className="w-full bg-white dark:bg-transparent min-h-[250px] pb-3 border border-gray-100 dark:border-[#242424] px-3 rounded-md mb-8">
       {/* header */}
       <PostHeader
         avatar={avatar}

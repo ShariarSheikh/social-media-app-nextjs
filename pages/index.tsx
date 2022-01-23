@@ -13,14 +13,14 @@ const Home: NextPage = () => {
   const { user } = useSelector(isLoggedIn);
 
   return (
-    <div className="w-full bg-[#ffffff] dark:bg-[#121212]">
+    <div className="w-full bg-[#efefef] dark:bg-[#121212]">
       <Head>
         <title>People😎 Dev</title>
         <meta name="description" content="chat application" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="w-full min-h-screen mt-16 relative">
+      <main className="w-full min-h-screen mt-14 pt-4 relative">
         <AllTags />
         <SelectedTags />
         <section className="w-full px-3 2xl:px-0 max-w-[1366px] flex flex-row min-h-screen relative m-auto overflow-hidden">

@@ -15,7 +15,7 @@ const Index = () => {
   }
 
   return (
-    <div className="w-full border dark:border-[#302e2e] p-2 mt-5">
+    <div className="w-full border bg-white dark:bg-transparent dark:border-[#302e2e] p-2 mt-5">
       <div className="w-[40px] m-auto h-[40px] rounded-full overflow-hidden flex justify-center items-center">
         {user.profileImg && (
           <Image
@@ -47,7 +47,7 @@ const Index = () => {
       <div className="w-full flex justify-center items-center mt-6">
         <button
           onClick={() => logOutUser()}
-          className="bg-gray-100 w-full h-9 font-semibold dark:bg-gray-800 dark:hover:bg-gray-900 hover:bg-gray-100 active:scale-105 duration-100"
+          className="bg-[#efefef] text-black dark:text-[#9ca3af] w-full h-9 font-semibold dark:bg-[#3f4041] dark:hover:bg-gray-900 hover:bg-gray-100 active:scale-105 duration-100"
         >
           LogOut
         </button>
